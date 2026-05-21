@@ -19,7 +19,7 @@ A clean, modern Todo application built with Angular 17+.
 
 ## Live Demo
 
-https://SergiyKusiy.github.io/Angular-Todo-App/
+[Open App](https://sergiykusiy.github.io/Angular_Todo-App/)
 
 ## Run locally
 
