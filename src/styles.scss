@@ -1,0 +1,40 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-weight: $font-weight-light;
+}
+
+body {
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  padding-top: $spacing-xl;
+
+  background: linear-gradient(180deg, #fdfbfb 0%, #f7f7f7 100%);
+
+  font-family: $font-family-base;
+  color: $color-text-base;
+
+  @include font-smoothing;
+}
+
+input,
+button {
+  font: inherit;
+}
+
+::selection {
+  background: $color-primary-light;
+}

@@ -1,0 +1,39 @@
+<section class="todoapp">
+  <h1>todos</h1>
+  <app-header
+    [title]="title()"
+    [isLoading]="isLoading()"
+    [hasTodos]="todos().length > 0"
+    [isAllCompleted]="isAllCompleted()"
+    (titleChange)="onTitleChange($event)"
+    (addTodo)="onAddTodo()"
+    (toggleAll)="onToggleAll()"
+  >
+  </app-header>
+
+  <app-todo-list
+    [todos]="filteredTodos()"
+    [processingTodoIds]="processingTodoIds()"
+    (deleteTodo)="onDeleteTodo($event)"
+    (toggleTodo)="onToggleTodo($event)"
+    (renameTodo)="onRenameTodo($event)"
+  >
+  </app-todo-list>
+
+  @if (todos().length > 0) {
+    <app-footer
+      [activeCount]="activeCount()"
+      [completedCount]="completedCount()"
+      [filter]="filter()"
+      (filterChange)="onFilterChange($event)"
+      (clearCompleted)="onClearCompleted()"
+    >
+    </app-footer>
+  }
+</section>
+
+<app-error-notification
+  [error]="error()"
+  (close)="onCloseError()"
+>
+</app-error-notification>

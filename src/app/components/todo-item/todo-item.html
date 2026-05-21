@@ -1,0 +1,67 @@
+<div
+  data-cy="Todo"
+  class="todo"
+  [class.completed]="todo().completed"
+  [class.is-loading]="loading()"
+>
+  <label class="todo__status-label">
+    <input
+      data-cy="TodoStatus"
+      type="checkbox"
+      class="todo__status"
+      [checked]="todo().completed"
+      [disabled]="loading()"
+      (change)="onToggle($event)"
+    />
+  </label>
+
+  @if (isEditing) {
+    <input
+      data-cy="TodoTitleField"
+      type="text"
+      class="todo__title-field"
+      [(ngModel)]="editTitle"
+      (blur)="saveTitle()"
+      (keydown)="onKeyDown($event)"
+      autofocus
+    />
+  } @else {
+    <span
+      data-cy="TodoTitle"
+      class="todo__title"
+      (dblclick)="startEditing()"
+    >
+      {{ todo().title }}
+    </span>
+
+    <span
+      class="todo__priority"
+      [class]="'todo__priority todo__priority--' + todo().priority"
+    >
+      {{ todo().priority }}
+    </span>
+  }
+
+  @if (!isEditing) {
+    <button
+      type="button"
+      class="todo__remove"
+      data-cy="TodoDelete"
+      [disabled]="loading()"
+      aria-label="Delete todo"
+      (click)="onDelete()"
+    >
+      ×
+    </button>
+  }
+
+  <div
+    data-cy="TodoLoader"
+    class="modal overlay"
+    [class.is-active]="loading()"
+    aria-hidden="true"
+  >
+    <div class="modal-background has-background-white-ter"></div>
+    <div class="loader"></div>
+  </div>
+</div>

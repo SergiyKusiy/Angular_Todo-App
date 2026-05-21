@@ -1,0 +1,14 @@
+<div
+  data-cy="ErrorNotification"
+  class="notification is-danger is-light has-text-weight-normal"
+  [class.hidden]="!error"
+>
+  <button
+    data-cy="HideErrorButton"
+    type="button"
+    class="delete"
+    (click)="onClose()"
+  ></button>
+
+  {{ error }}
+</div>

@@ -1,0 +1,43 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.todoapp {
+  width: 100%;
+  max-width: $todo-max-width;
+
+  margin: 0 auto;
+  padding: 0 $spacing-md $spacing-xl;
+
+  h1 {
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: $font-size-title;
+    font-weight: $font-weight-thin;
+    line-height: 1;
+    letter-spacing: -5px;
+    color: rgba(175, 47, 47, 0.11);
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+    user-select: none;
+  }
+
+  &__content {
+    position: relative;
+    overflow: hidden;
+    background-color: $color-surface;
+    border-radius: $border-radius-sm;
+    box-shadow: $shadow-card;
+
+    &::before {
+      @include card-layer(6px, 4px);
+    }
+
+    &::after {
+      @include card-layer(12px, 8px);
+    }
+  }
+
+  &__main {
+    position: relative;
+    border-top: 1px solid $color-border-light;
+  }
+}

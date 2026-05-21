@@ -1,0 +1,148 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.todo {
+  position: relative;
+  @include flex-align-center;
+  min-height: 58px;
+  padding: 0 $spacing-md;
+  background: $color-surface;
+  border-bottom: 1px solid $color-border;
+  backdrop-filter: blur(8px);
+  @include transition(background-color);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background-color: $color-surface-hover;
+
+    .todo__remove {
+      opacity: 1;
+    }
+  }
+
+  &.completed .todo__title {
+    color: $color-check-border;
+    text-decoration: line-through;
+  }
+
+  &.is-loading {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  &__status-label {
+    @include flex-center;
+    margin-right: 14px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  &__status {
+    width: $checkbox-size;
+    height: $checkbox-size;
+    appearance: none;
+    border: 1px solid $color-check-border;
+    border-radius: 50%;
+    cursor: pointer;
+    @include transition(border-color, background-color);
+
+    &:hover {
+      border-color: $color-primary;
+    }
+
+    &:checked {
+      border-color: $color-primary;
+      background:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%235dc2af' d='M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z'/%3E%3C/svg%3E")
+        center no-repeat;
+      background-size: 18px;
+    }
+  }
+
+  &__title {
+    flex: 1;
+    padding: 15px 0;
+    font-size: $font-size-todo;
+    font-weight: $font-weight-light;
+    line-height: 1.2;
+    color: $color-text-dark;
+    word-break: break-word;
+    cursor: pointer;
+    @include transition(color);
+  }
+
+  &__priority {
+    margin-left: 10px;
+    padding: $spacing-xs 10px;
+    border-radius: $border-radius-pill;
+    font-size: $font-size-small;
+    font-weight: $font-weight-bold;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    flex-shrink: 0;
+
+    @include priority-badges;
+  }
+
+  &__title-field {
+    flex: 1;
+    margin: $spacing-sm 0;
+    padding: 12px $spacing-md;
+    border: 1px solid $color-border-input;
+    border-radius: $border-radius-sm;
+    outline: none;
+    font-size: $font-size-todo;
+    font-weight: $font-weight-light;
+    font-family: inherit;
+    color: $color-text-base;
+    box-shadow: $shadow-input;
+  }
+
+  &__remove {
+    @include flex-center;
+    @include button-reset;
+    width: $remove-btn-size;
+    height: $remove-btn-size;
+    margin-left: $spacing-sm;
+    color: $color-remove-idle;
+    font-size: 28px;
+    font-weight: $font-weight-light;
+    line-height: 1;
+    opacity: 0;
+    flex-shrink: 0;
+    @include transition(opacity, color, transform);
+
+    &:hover {
+      color: $color-remove-hover;
+      transform: scale(1.1);
+    }
+
+    &:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.modal.overlay {
+  display: none;
+
+  &.is-active {
+    @include overlay;
+    position: absolute;
+    display: flex;
+  }
+}
+
+.loader {
+  @include loader;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

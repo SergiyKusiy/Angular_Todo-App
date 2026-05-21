@@ -1,0 +1,11 @@
+<section class="todoapp__main" data-cy="TodoList">
+  @for (todo of todos; track todo.id) {
+    <app-todo-item
+      [todo]="todo"
+      [loading]="isProcessing(todo.id)"
+      (delete)="deleteTodo.emit($event)"
+      (toggle)="toggleTodo.emit($event)"
+      (rename)="renameTodo.emit($event)"
+    />
+  }
+</section>

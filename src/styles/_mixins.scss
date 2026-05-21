@@ -1,0 +1,116 @@
+@use 'variables' as *;
+
+@mixin button-reset {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-align-center {
+  display: flex;
+  align-items: center;
+}
+
+@mixin transition($props...) {
+  $result: ();
+  @each $prop in $props {
+    $result: append($result, $prop $transition-base, comma);
+  }
+  transition: $result;
+}
+
+@mixin sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@mixin absolute-fill {
+  position: absolute;
+  inset: 0;
+}
+
+@mixin absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin pseudo-base {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+@mixin overlay($bg: rgba(255, 255, 255, 0.7), $blur: 1px) {
+  @include absolute-fill;
+  @include flex-center;
+  background: $bg;
+  @if $blur > 0 {
+    backdrop-filter: blur($blur);
+  }
+}
+
+@mixin card-layer($top, $margin) {
+  @include pseudo-base;
+  height: 100%;
+  background: $color-surface;
+  border: 1px solid #f0f0f0;
+  top: $top;
+  margin: 0 $margin;
+  z-index: $z-pseudo-bg;
+}
+
+@mixin loader($size: $loader-size, $color: $color-primary, $border-idle: $color-border) {
+  width: $size;
+  height: $size;
+  border: 3px solid $border-idle;
+  border-top-color: $color;
+  border-radius: 50%;
+  animation: spin $animation-spin-duration linear infinite;
+}
+
+@mixin priority-badges {
+  @each $name, $colors in $priorities {
+    $bg:   nth($colors, 1);
+    $text: nth($colors, 2);
+
+    &--#{$name} {
+      background: $bg;
+      color: $text;
+    }
+  }
+}
+
+@mixin animation-fade-up($name, $offset: 10px) {
+  @keyframes #{$name} {
+    from {
+      opacity: 0;
+      transform: translateX(-50%) translateY($offset);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+}
+
+@mixin font-smoothing {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

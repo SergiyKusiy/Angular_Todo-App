@@ -1,0 +1,76 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.todoapp {
+  &__footer {
+    position: relative;
+    @include flex-align-center;
+    justify-content: space-between;
+    padding: 12px $spacing-md;
+    font-size: $font-size-base;
+    color: $color-text-muted;
+    background: $color-surface;
+    border-top: 1px solid $color-border;
+
+    &::before {
+      @include pseudo-base;
+      bottom: 0;
+      height: 50px;
+      overflow: hidden;
+      box-shadow: $shadow-footer;
+      z-index: $z-pseudo-bg;
+    }
+
+    .todo-count {
+      flex: 1;
+      margin-right: 5px;
+
+      strong {
+        font-weight: $font-weight-semi;
+      }
+    }
+  }
+
+  &__clear-completed {
+    @include button-reset;
+    color: $color-text-muted;
+    font-size: $font-size-base;
+    font-family: inherit;
+    @include transition(color, opacity);
+
+    &:hover:not(:disabled) {
+      color: #333;
+      text-decoration: underline;
+    }
+
+    &:disabled {
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+}
+
+.filter {
+  @include flex-center;
+  gap: 6px;
+  flex: 1;
+
+  &__link {
+    padding: $spacing-xs 10px;
+    border: 1px solid transparent;
+    border-radius: $border-radius-md;
+    color: inherit;
+    font-size: $font-size-base;
+    text-decoration: none;
+    @include transition(border-color, color);
+
+    &:hover {
+      border-color: rgba(175, 47, 47, 0.15);
+    }
+
+    &.selected {
+      border-color: rgba(175, 47, 47, 0.3);
+      color: #333;
+    }
+  }
+}

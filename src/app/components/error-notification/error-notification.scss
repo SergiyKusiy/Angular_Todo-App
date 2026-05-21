@@ -1,0 +1,64 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+@include animation-fade-up(notification-show);
+
+.notification {
+  position: fixed;
+  left: 50%;
+  bottom: $spacing-lg;
+  transform: translateX(-50%);
+
+  @include flex-align-center;
+
+  min-width: 320px;
+  max-width: 500px;
+
+  padding: 14px 48px 14px $spacing-md;
+
+  background: rgba($color-surface, 0.95);
+  color: #5f5f5f;
+  border: 1px solid $color-danger-border;
+  border-radius: $border-radius-lg;
+  backdrop-filter: blur(10px);
+  box-shadow: $shadow-notification;
+
+  font-size: $font-size-base;
+  font-weight: $font-weight-normal;
+  line-height: 1.4;
+
+  z-index: $z-notification;
+
+  animation: notification-show $animation-notification-duration ease;
+
+  &.hidden {
+    display: none;
+  }
+
+  .delete {
+    @include button-reset;
+    @include flex-center;
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    @include transition(background-color, color);
+
+    &::after {
+      content: '✕';
+      font-size: $font-size-base;
+      color: $color-text-hint;
+    }
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.05);
+
+      &::after {
+        color: #555;
+      }
+    }
+  }
+}
