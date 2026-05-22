@@ -1,15 +1,4 @@
 <header class="todoapp__header">
-  <!-- @if (hasTodos()) {
-    <button
-      type="button"
-      class="todoapp__toggle-all"
-      [class.active]="isAllCompleted()"
-      data-cy="ToggleAllButton"
-      aria-label="Toggle all todos"
-      (click)="toggleAll.emit()"
-    ></button>
-  } -->
-
   <form (submit)="onSubmit($event)">
     <input
       data-cy="NewTodoField"
